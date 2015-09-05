@@ -51,7 +51,7 @@ namespace OpenCvSharp
             IntPtr subdiv = NativeMethods.cvCreateSubdiv2D(
                 SeqType.KindSubdiv2D, SizeOf, CvSubdiv2DPoint.SizeOf, CvQuadEdge2D.SizeOf, storage.CvPtr
             );
-
+            
             if (subdiv == IntPtr.Zero)
             {
                 throw new OpenCvSharpException("Failed to create CvSubdiv2D");
@@ -61,6 +61,7 @@ namespace OpenCvSharp
 
             Initialize(subdiv);
             holdingStorage = storage;
+            GC.KeepAlive(storage);
         }
 #if LANG_JP
         /// <summary>
