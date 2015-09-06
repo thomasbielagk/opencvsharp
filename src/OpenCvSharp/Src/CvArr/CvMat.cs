@@ -62,7 +62,7 @@ namespace OpenCvSharp
         /// <param name="type">Type of the matrix elements.</param>
         /// <returns></returns>
 #endif
-        public CvMat(int rows, int cols, MatrixType type)
+        public CvMat(int rows, int cols, MatrixType type) 
         {
             ptr = NativeMethods.cvCreateMat(rows, cols, type);
             if (ptr == IntPtr.Zero)
@@ -282,6 +282,13 @@ namespace OpenCvSharp
             : base(isEnabledDispose)
         {
             ptr = AllocMemory(SizeOf);
+            unsafe
+            {
+                WCvMat* m = (WCvMat*) ptr;
+                m->type = CvConst.CV_MAT_MAGIC_VAL | CvConst.CV_MAT_CONT_FLAG;
+                m->refcount = null;
+                m->hdr_refcount = 0;
+            }
         }
 
         #region Static initializer
