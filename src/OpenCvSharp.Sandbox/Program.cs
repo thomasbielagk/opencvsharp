@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using OpenCvSharp.Blob;
 using OpenCvSharp.CPlusPlus;
 using OpenCvSharp.CPlusPlus.Gpu;
@@ -25,10 +26,12 @@ namespace OpenCvSharp.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+            OpenCVError();
+            /*
             double ret = Cv2.PointPolygonTest(new[] { new Point2f(0, 0), new Point2f(0, 10), new Point2f(10, 10), new Point2f(10, 0) }, new Point2f(5, 5), false);
             ret.ToString();
 
-            BForceMatcherSample();
+            BForceMatcherSample();*/
             //ChamferMatchingSample();
 
             /*var img1 = new IplImage("data/lenna.png", LoadMode.Color);
@@ -39,6 +42,39 @@ namespace OpenCvSharp.Sandbox
             //Stitching(mats);
             //Track();
             //Run();
+        }
+
+        private static void OpenCVError()
+        {
+            var mat = new Mat(5, 1, MatType.CV_32FC1);
+            var mat2 = new MatOfFloat(mat);
+            var indexer = mat2.GetIndexer();
+            indexer[0, 0] = 2f;
+            indexer[1, 0] = 1f;
+            indexer[2, 0] = 3f;
+            indexer[3, 0] = 4f;
+            indexer[4, 0] = 5f;
+            double maxValue, minValue;
+            int test = 10;
+            int maxIdx, minIdx;
+            Console.WriteLine(test);
+            //Cv2.MinMaxIdx(mat, out minValue, out maxValue, out minIdx, out maxIdx);
+            Cv2.MinMaxIdx(mat, out minIdx, out maxIdx);
+            //Cv2.MinMaxLoc(mat, out minValue, out maxValue);
+            //Foo(out minValue, out maxValue, out minIdx, out maxIdx);
+            
+            var test2 = test + 1;
+            Console.WriteLine(test);
+            test2.ToString();
+            Console.Read();
+        }
+
+        private static void Foo(out double a, out double b, out int c, out int d)
+        {
+            a = 1;
+            b = 2;
+            c = 3;
+            d = 4;
         }
 
         private static void BForceMatcherSample()

@@ -1260,8 +1260,8 @@ namespace OpenCvSharp.CPlusPlus
         /// <param name="criteria">Termination criteria for the iterative optimization algorithm.</param>
         /// <returns></returns>
         public static double CalibrateCamera(
-            IEnumerable<IEnumerable<Point3d>> objectPoints,
-            IEnumerable<IEnumerable<Point2d>> imagePoints,
+            IEnumerable<IEnumerable<Point3f>> objectPoints,
+            IEnumerable<IEnumerable<Point2f>> imagePoints,
             Size imageSize,
             double[,] cameraMatrix,
             double[] distCoeffs,
@@ -1282,8 +1282,8 @@ namespace OpenCvSharp.CPlusPlus
             TermCriteria criteria0 = criteria.GetValueOrDefault(
                 new TermCriteria(CriteriaType.Iteration | CriteriaType.Epsilon, 30, Double.Epsilon));
 
-            using (var op = new ArrayAddress2<Point3d>(objectPoints))
-            using (var ip = new ArrayAddress2<Point2d>(imagePoints))
+            using (var op = new ArrayAddress2<Point3f>(objectPoints))
+            using (var ip = new ArrayAddress2<Point2f>(imagePoints))
             using (var rvecsVec = new VectorOfMat())
             using (var tvecsVec = new VectorOfMat())
             {
