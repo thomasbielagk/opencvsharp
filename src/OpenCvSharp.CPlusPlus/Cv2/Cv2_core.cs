@@ -775,7 +775,8 @@ namespace OpenCvSharp.CPlusPlus
             if (src == null)
                 throw new ArgumentNullException("src");
             src.ThrowIfDisposed();
-            NativeMethods.core_minMaxLoc(src.CvPtr, out minVal, out maxVal);
+            NativeMethods.core_minMaxLoc1(src.CvPtr, out minVal, out maxVal);
+            GC.KeepAlive(src);
         }
 
         /// <summary>
@@ -806,9 +807,10 @@ namespace OpenCvSharp.CPlusPlus
                 throw new ArgumentNullException("src");
             src.ThrowIfDisposed();
             CvPoint minLoc0, maxLoc0;
-            NativeMethods.core_minMaxLoc(src.CvPtr, out minVal, out maxVal, out minLoc0, out maxLoc0, ToPtr(mask));
+            NativeMethods.core_minMaxLoc2(src.CvPtr, out minVal, out maxVal, out minLoc0, out maxLoc0, ToPtr(mask));
             minLoc = minLoc0;
             maxLoc = maxLoc0;
+            GC.KeepAlive(src);
         }
         #endregion
         #region MinMaxIdx
@@ -823,7 +825,8 @@ namespace OpenCvSharp.CPlusPlus
             if (src == null)
                 throw new ArgumentNullException("src");
             src.ThrowIfDisposed();
-            NativeMethods.core_minMaxIdx(src.CvPtr, out minVal, out maxVal);
+            NativeMethods.core_minMaxIdx1(src.CvPtr, out minVal, out maxVal);
+            GC.KeepAlive(src);
         }
 
         /// <summary>
@@ -853,7 +856,8 @@ namespace OpenCvSharp.CPlusPlus
             if (src == null)
                 throw new ArgumentNullException("src");
             src.ThrowIfDisposed();
-            NativeMethods.core_minMaxIdx(src.CvPtr, out minVal, out maxVal, out minIdx, out maxIdx, ToPtr(mask));
+            NativeMethods.core_minMaxIdx2(src.CvPtr, out minVal, out maxVal, out minIdx, out maxIdx, ToPtr(mask));
+            GC.KeepAlive(src);
         }
         #endregion
         #region Reduce

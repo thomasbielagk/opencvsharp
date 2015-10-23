@@ -98,15 +98,15 @@ namespace OpenCvSharp.CPlusPlus
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
         public static extern void core_normalize(IntPtr src, IntPtr dst, double alpha, double beta,
                              int normType, int dtype, IntPtr mask);
-        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, EntryPoint = "core_minMaxLoc1")]
-        public static extern void core_minMaxLoc(IntPtr src, out double minVal, out double maxVal);
-        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, EntryPoint = "core_minMaxLoc2")]
-        public static extern void core_minMaxLoc(IntPtr src, out double minVal, out double maxVal,
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void core_minMaxLoc1(IntPtr src, out double minVal, out double maxVal);
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void core_minMaxLoc2(IntPtr src, out double minVal, out double maxVal,
             out CvPoint minLoc, out CvPoint maxLoc, IntPtr mask);
-        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, EntryPoint = "core_minMaxIdx1")]
-        public static extern void core_minMaxIdx(IntPtr src, out double minVal, out double maxVal);
-        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl, EntryPoint = "core_minMaxIdx2")]
-        public static extern void core_minMaxIdx(IntPtr src, out double minVal, out double maxVal,
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void core_minMaxIdx1(IntPtr src, out double minVal, out double maxVal);
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void core_minMaxIdx2(IntPtr src, out double minVal, out double maxVal,
             out int minIdx, out int maxIdx, IntPtr mask);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
         public static extern void core_reduce(IntPtr src, IntPtr dst, int dim, int rtype, int dtype);
