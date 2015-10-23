@@ -25,10 +25,13 @@ namespace OpenCvSharp.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
+            VideoCaptureSample();
+            //OpenCVError();
+            /*
             double ret = Cv2.PointPolygonTest(new[] { new Point2f(0, 0), new Point2f(0, 10), new Point2f(10, 10), new Point2f(10, 0) }, new Point2f(5, 5), false);
             ret.ToString();
 
-            BForceMatcherSample();
+            BForceMatcherSample();*/
             //ChamferMatchingSample();
 
             /*var img1 = new IplImage("data/lenna.png", LoadMode.Color);
@@ -39,6 +42,41 @@ namespace OpenCvSharp.Sandbox
             //Stitching(mats);
             //Track();
             //Run();
+        }
+
+        private static void VideoCaptureSample()
+        {
+            var cap = new VideoCapture(0);
+
+            if (!cap.IsOpened())
+            {
+                Console.WriteLine("Can't use camera.");
+                return;
+            }
+
+            var frame = new Mat();
+            cap.Read(frame);
+            Window.ShowImages(frame);
+            frame.ToString();
+        }
+
+        private static void OpenCVError()
+        {
+            var mat = new Mat(5, 1, MatType.CV_32FC1);
+            var mat2 = new MatOfFloat(mat);
+            var indexer = mat2.GetIndexer();
+            indexer[0, 0] = 2f;
+            indexer[1, 0] = 1f;
+            indexer[2, 0] = 3f;
+            indexer[3, 0] = 4f;
+            indexer[4, 0] = 5f;
+            double maxValue, minValue;
+            var test = 10;
+            int maxIdx, minIdx;
+            Console.WriteLine(test);
+            Cv2.MinMaxIdx(mat, out minValue, out maxValue, out minIdx, out maxIdx);
+            Console.WriteLine(test);
+            Console.Read();
         }
 
         private static void BForceMatcherSample()
