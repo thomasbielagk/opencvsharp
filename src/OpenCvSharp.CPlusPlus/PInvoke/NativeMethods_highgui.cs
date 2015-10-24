@@ -95,5 +95,7 @@ namespace OpenCvSharp.CPlusPlus
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
         public static extern void highgui_VideoWriter_write(IntPtr obj, IntPtr image);
 
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void highgui_cvConvertImage_Mat(IntPtr src, IntPtr dst, int flags);
     }
 }

@@ -344,5 +344,27 @@ namespace OpenCvSharp.CPlusPlus
             }
         }
         #endregion
+
+        /// <summary>
+        /// utility function: convert one image to another with optional vertical flip
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="flags"></param>
+        public static void ConvertImage(Mat src, Mat dst, ConvertImageFlag flags = ConvertImageFlag.None)
+        {
+            if (src == null)
+                throw new ArgumentNullException("src");
+            if (dst == null)
+                throw new ArgumentNullException("dst");
+            src.ThrowIfDisposed();
+            dst.ThrowIfDisposed();
+
+            dst.Create(src.Size(), MatType.CV_8UC3);
+            NativeMethods.highgui_cvConvertImage_Mat(src.CvPtr, dst.CvPtr, (int)flags);
+
+            GC.KeepAlive(src);
+            GC.KeepAlive(dst);
+        }
     }
 }
