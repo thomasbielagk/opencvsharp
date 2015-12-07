@@ -854,72 +854,72 @@ namespace OpenCvSharp.CPlusPlus.Gpu
         /// </summary>
         public Size WinSize
         {
-            get { return NativeMethods.HOGDescriptor_win_size_get(ptr); }
-            set { NativeMethods.HOGDescriptor_win_size_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_win_size_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_win_size_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public Size BlockSize
         {
-            get { return NativeMethods.HOGDescriptor_block_size_get(ptr); }
-            set { NativeMethods.HOGDescriptor_block_size_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_block_size_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_block_size_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public Size BlockStride
         {
-            get { return NativeMethods.HOGDescriptor_block_stride_get(ptr); }
-            set { NativeMethods.HOGDescriptor_block_stride_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_block_stride_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_block_stride_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public Size CellSize
         {
-            get { return NativeMethods.HOGDescriptor_cell_size_get(ptr); }
-            set { NativeMethods.HOGDescriptor_cell_size_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_cell_size_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_cell_size_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public int Nbins
         {
-            get { return NativeMethods.HOGDescriptor_nbins_get(ptr); }
-            set { NativeMethods.HOGDescriptor_nbins_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_nbins_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_nbins_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public double WinSigma
         {
-            get { return NativeMethods.HOGDescriptor_win_sigma_get(ptr); }
-            set { NativeMethods.HOGDescriptor_win_sigma_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_win_sigma_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_win_sigma_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public double ThresholdL2Hys
         {
-            get { return NativeMethods.HOGDescriptor_threshold_L2hys_get(ptr); }
-            set { NativeMethods.HOGDescriptor_threshold_L2hys_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_threshold_L2hys_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_threshold_L2hys_set(ptr, value); }
         }
         /// <summary>
         /// 
         /// </summary>
         public bool GammaCorrection
         {
-            get { return NativeMethods.HOGDescriptor_gamma_correction_get(ptr) != 0; }
-            set { NativeMethods.HOGDescriptor_gamma_correction_set(ptr, value ? 1 : 0); }
+            get { return NativeMethods.gpu_HOGDescriptor_gamma_correction_get(ptr) != 0; }
+            set { NativeMethods.gpu_HOGDescriptor_gamma_correction_set(ptr, value ? 1 : 0); }
         }
         /// <summary>
         /// 
         /// </summary>
         public int NLevels
         {
-            get { return NativeMethods.HOGDescriptor_nlevels_get(ptr); }
-            set { NativeMethods.HOGDescriptor_nlevels_set(ptr, value); }
+            get { return NativeMethods.gpu_HOGDescriptor_nlevels_get(ptr); }
+            set { NativeMethods.gpu_HOGDescriptor_nlevels_set(ptr, value); }
         }
         #endregion
 
@@ -968,7 +968,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
             Size blockSize0 = blockSize.GetValueOrDefault(new Size(16, 16));
             Size blockStride0 = blockStride.GetValueOrDefault(new Size(8, 8));
             Size cellSize0 = cellSize.GetValueOrDefault(new Size(8, 8));
-            ptr = NativeMethods.HOGDescriptor_new(
+            ptr = NativeMethods.gpu_HOGDescriptor_new(
                 winSize0, blockSize0, blockStride0, cellSize0,
                 nbins, winSigma, thresholdL2Hys, gammaCorrection, nlevels);
         }
@@ -1010,7 +1010,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
                     }
                     if (IsEnabledDispose)
                     {
-                        NativeMethods.HOGDescriptor_delete(ptr);
+                        NativeMethods.gpu_HOGDescriptor_delete(ptr);
                         if (svmDetector != null)
                             svmDetector.Dispose();
                     }
@@ -1060,7 +1060,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
             if (svmDetector != null)
                 svmDetector.Dispose();
             svmDetector = new VectorOfFloat(svmdetector);
-            NativeMethods.HOGDescriptor_setSVMDetector(ptr, svmDetector.CvPtr);
+            NativeMethods.gpu_HOGDescriptor_setSVMDetector(ptr, svmDetector.CvPtr);
         }
 
         /// <summary>
@@ -1071,7 +1071,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
         {
             if (disposed)
                 throw new ObjectDisposedException("HOGDescriptor");
-            return (int)NativeMethods.HOGDescriptor_getDescriptorSize(ptr);
+            return (int)NativeMethods.gpu_HOGDescriptor_getDescriptorSize(ptr);
         }
 
         /*
@@ -1146,7 +1146,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
 
             using (var flVec = new VectorOfPoint())
             {
-                NativeMethods.HOGDescriptor_detect(ptr, img.CvPtr, flVec.CvPtr, hitThreshold, winStride, padding);
+                NativeMethods.gpu_HOGDescriptor_detect(ptr, img.CvPtr, flVec.CvPtr, hitThreshold, winStride, padding);
                 // std::vector<cv::Point>*からCvPoint[]に移し替えて返す
                 return flVec.ToArray();
             }
@@ -1175,7 +1175,7 @@ namespace OpenCvSharp.CPlusPlus.Gpu
             Size padding0 = padding.GetValueOrDefault(new Size());
             using (var flVec = new VectorOfRect())
             {
-                NativeMethods.HOGDescriptor_detectMultiScale(ptr, img.CvPtr, flVec.CvPtr, hitThreshold, winStride0, padding0, scale, groupThreshold);
+                NativeMethods.gpu_HOGDescriptor_detectMultiScale(ptr, img.CvPtr, flVec.CvPtr, hitThreshold, winStride0, padding0, scale, groupThreshold);
                 // std::vector<cv::Rect>*からCvRect[]に移し替えて返す
                 return flVec.ToArray();
             }          

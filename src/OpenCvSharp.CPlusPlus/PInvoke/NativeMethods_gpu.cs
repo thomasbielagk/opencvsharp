@@ -243,69 +243,69 @@ namespace OpenCvSharp.CPlusPlus
 
         #region HogDescriptor
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int HOGDescriptor_sizeof();
+        public static extern int gpu_HOGDescriptor_sizeof();
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr HOGDescriptor_new( CvSize win_size, CvSize block_size, CvSize block_stride, CvSize cell_size, 
+        public static extern IntPtr gpu_HOGDescriptor_new(CvSize win_size, CvSize block_size, CvSize block_stride, CvSize cell_size, 
 	        int nbins, double winSigma, double threshold_L2Hys, bool gamma_correction, int nlevels);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_delete(IntPtr obj);
+        public static extern void gpu_HOGDescriptor_delete(IntPtr obj);
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong HOGDescriptor_getDescriptorSize(IntPtr obj);
+        public static extern ulong gpu_HOGDescriptor_getDescriptorSize(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong HOGDescriptor_getBlockHistogramSize(IntPtr obj);
+        public static extern ulong gpu_HOGDescriptor_getBlockHistogramSize(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int HOGDescriptor_checkDetectorSize(IntPtr obj);
+        public static extern int gpu_HOGDescriptor_checkDetectorSize(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double HOGDescriptor_getWinSigma(IntPtr obj);
+        public static extern double gpu_HOGDescriptor_getWinSigma(IntPtr obj);
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_setSVMDetector(IntPtr obj, IntPtr svmdetector);
+        public static extern void gpu_HOGDescriptor_setSVMDetector(IntPtr obj, IntPtr svmdetector);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_detect(IntPtr obj, IntPtr img, IntPtr found_locations, double hit_threshold, CvSize win_stride, CvSize padding);
+        public static extern void gpu_HOGDescriptor_detect(IntPtr obj, IntPtr img, IntPtr found_locations, double hit_threshold, CvSize win_stride, CvSize padding);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_detectMultiScale(IntPtr obj, IntPtr img, IntPtr found_locations, 
+        public static extern void gpu_HOGDescriptor_detectMultiScale(IntPtr obj, IntPtr img, IntPtr found_locations, 
 										           double hit_threshold, CvSize win_stride, CvSize padding, double scale, int group_threshold);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
         public static extern void HOGDescriptor_getDescriptors(IntPtr obj, IntPtr img, CvSize win_stride, IntPtr descriptors, [MarshalAs(UnmanagedType.I4)] Gpu.DescriptorFormat descr_format);
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CvSize HOGDescriptor_win_size_get(IntPtr obj);
+        public static extern CvSize gpu_HOGDescriptor_win_size_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CvSize HOGDescriptor_block_size_get(IntPtr obj);
+        public static extern CvSize gpu_HOGDescriptor_block_size_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CvSize HOGDescriptor_block_stride_get(IntPtr obj);
+        public static extern CvSize gpu_HOGDescriptor_block_stride_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CvSize HOGDescriptor_cell_size_get(IntPtr obj);
+        public static extern CvSize gpu_HOGDescriptor_cell_size_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int HOGDescriptor_nbins_get(IntPtr obj);
+        public static extern int gpu_HOGDescriptor_nbins_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double HOGDescriptor_win_sigma_get(IntPtr obj);
+        public static extern double gpu_HOGDescriptor_win_sigma_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double HOGDescriptor_threshold_L2hys_get(IntPtr obj);
+        public static extern double gpu_HOGDescriptor_threshold_L2hys_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int HOGDescriptor_nlevels_get(IntPtr obj);
+        public static extern int gpu_HOGDescriptor_nlevels_get(IntPtr obj);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int HOGDescriptor_gamma_correction_get(IntPtr obj);
+        public static extern int gpu_HOGDescriptor_gamma_correction_get(IntPtr obj);
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_win_size_set(IntPtr obj, CvSize value);
+        public static extern void gpu_HOGDescriptor_win_size_set(IntPtr obj, CvSize value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_block_size_set(IntPtr obj, CvSize value);
+        public static extern void gpu_HOGDescriptor_block_size_set(IntPtr obj, CvSize value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_block_stride_set(IntPtr obj, CvSize value);
+        public static extern void gpu_HOGDescriptor_block_stride_set(IntPtr obj, CvSize value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_cell_size_set(IntPtr obj, CvSize value);
+        public static extern void gpu_HOGDescriptor_cell_size_set(IntPtr obj, CvSize value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_nbins_set(IntPtr obj, int value);
+        public static extern void gpu_HOGDescriptor_nbins_set(IntPtr obj, int value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_win_sigma_set(IntPtr obj, double value);
+        public static extern void gpu_HOGDescriptor_win_sigma_set(IntPtr obj, double value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_threshold_L2hys_set(IntPtr obj, double value);
+        public static extern void gpu_HOGDescriptor_threshold_L2hys_set(IntPtr obj, double value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_nlevels_set(IntPtr obj, int value);
+        public static extern void gpu_HOGDescriptor_nlevels_set(IntPtr obj, int value);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HOGDescriptor_gamma_correction_set(IntPtr obj, int value);
+        public static extern void gpu_HOGDescriptor_gamma_correction_set(IntPtr obj, int value);
         #endregion
 
         #region MOG_GPU
