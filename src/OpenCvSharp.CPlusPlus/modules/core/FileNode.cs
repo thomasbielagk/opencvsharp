@@ -330,6 +330,29 @@ namespace OpenCvSharp.CPlusPlus
         #region Methods
 
         /// <summary>
+        /// Returns pointer to the underlying C FileStorage structure
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <returns></returns>
+        public static explicit operator CvFileNode(FileNode fs)
+        {
+            if (fs == null)
+                throw new ArgumentNullException("fs");
+            return fs.ToLegacy();
+        }
+
+        /// <summary>
+        /// Returns pointer to the underlying C FileStorage structure
+        /// </summary>
+        /// <returns></returns>
+        public CvFileNode ToLegacy()
+        {
+            IntPtr p = NativeMethods.core_FileNode_toLegacy(ptr);
+            var ret = new CvFileNode(p);
+            return ret;
+        }
+
+        /// <summary>
         /// Reads node elements to the buffer with the specified format
         /// </summary>
         /// <param name="fmt"></param>

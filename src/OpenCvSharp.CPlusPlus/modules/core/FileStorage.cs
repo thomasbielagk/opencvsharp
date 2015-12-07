@@ -239,11 +239,21 @@ namespace OpenCvSharp.CPlusPlus
         /// <returns></returns>
         public static explicit operator CvFileStorage(FileStorage fs)
         {
-            IntPtr ptr = NativeMethods.core_FileStorage_toLegacy(fs.CvPtr);
-            var ret = new CvFileStorage(ptr) {IsEnabledDispose = false};
-            return ret;
+            if (fs == null) 
+                throw new ArgumentNullException("fs");
+            return fs.ToLegacy();
         }
 
+        /// <summary>
+        /// Returns pointer to the underlying C FileStorage structure
+        /// </summary>
+        /// <returns></returns>
+        public CvFileStorage ToLegacy()
+        {
+            IntPtr p = NativeMethods.core_FileStorage_toLegacy(ptr);
+            var ret = new CvFileStorage(p) { IsEnabledDispose = false };
+            return ret;
+        }
 
         /// <summary>
         /// Writes one or more numbers of the specified format to the currently written structure

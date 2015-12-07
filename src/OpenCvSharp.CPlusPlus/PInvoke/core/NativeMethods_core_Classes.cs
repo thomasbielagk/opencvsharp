@@ -277,6 +277,9 @@ namespace OpenCvSharp.CPlusPlus
             IntPtr obj, StringBuilder buf, int bufLength);
 
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr core_FileNode_toLegacy(IntPtr obj);
+
+        [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
         public static extern void core_FileNode_readRaw(
             IntPtr obj, [MarshalAs(UnmanagedType.LPStr)] string fmt, IntPtr vec, IntPtr len);
         [DllImport(DllExtern, CallingConvention = CallingConvention.Cdecl)]
