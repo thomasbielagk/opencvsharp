@@ -1,76 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using OpenCvSharp;
 using OpenCvSharp.CPlusPlus.Gpu;
-using OpenCvSharp.Utilities;
 
 namespace OpenCvSharp.CPlusPlus
 {
-    /// <summary>
-    /// Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
-    /// </summary>
-    public sealed class OutputArray<T> : OutputArray
-        where T : struct
-    {
-        private bool disposed;
-        private List<T> list;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="list"></param>
-        internal OutputArray(List<T> list)
-            : base(new Mat())
-        {
-            if (list == null)
-                throw new ArgumentNullException("list");
-            this.list = list;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override void AssignResult()
-        {
-            if (!IsReady())
-                throw new NotSupportedException();
-
-            // Matで結果取得
-            IntPtr matPtr = NativeMethods.core_OutputArray_getMat(ptr);
-            using (Mat mat = new Mat(matPtr))
-            {
-                // 配列サイズ
-                int size = mat.Rows * mat.Cols;
-                // 配列にコピー
-                T[] array = new T[size];
-                using (ArrayAddress1<T> aa = new ArrayAddress1<T>(array))
-                {
-                    int elemSize = Marshal.SizeOf(typeof(T));
-                    Util.CopyMemory(aa.Pointer, mat.Data, size * elemSize);
-                }
-                // リストにコピー
-                list.Clear();
-                list.AddRange(array);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                list = null;
-                disposed = true;
-                base.Dispose(disposing);
-            }
-        }
-    }
-
     /// <summary>
     /// Proxy datatype for passing Mat's and List&lt;&gt;'s as output parameters
     /// </summary>
@@ -101,6 +36,21 @@ namespace OpenCvSharp.CPlusPlus
             if (mat == null)
                 throw new ArgumentNullException("mat");
             ptr = NativeMethods.core_OutputArray_new_byGpuMat(mat.CvPtr);
+            obj = mat;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mat"></param>
+        internal OutputArray(IEnumerable<Mat> mat)
+        {
+            if (mat == null)
+                throw new ArgumentNullException("mat");
+            using (var matVector = new VectorOfMat(mat))
+            {
+                ptr = NativeMethods.core_OutputArray_new_byVectorOfMat(matVector.CvPtr);
+            }
             obj = mat;
         }
 
@@ -198,6 +148,24 @@ namespace OpenCvSharp.CPlusPlus
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public bool IsVectorOfMat()
+        {
+            return obj is IEnumerable<Mat>;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mat> GetVectorOfMat()
+        {
+            return obj as IEnumerable<Mat>;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual void AssignResult()
         {
             if(!IsReady())
@@ -285,13 +253,26 @@ namespace OpenCvSharp.CPlusPlus
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static OutputArray Create<T>(List<T> list)
+        public static OutputArrayOfStructList<T> Create<T>(List<T> list)
             where T : struct 
         {
             if (list == null)
                 throw new ArgumentNullException("list");
-            return new OutputArray<T>(list);
+            return new OutputArrayOfStructList<T>(list);
         }
+
+        /// <summary>
+        /// Creates a proxy class of the specified list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static OutputArrayOfMatList Create(List<Mat> list)
+        {
+            if (list == null)
+                throw new ArgumentNullException("list");
+            return new OutputArrayOfMatList(list);
+        }
+
         #endregion
     }
 }

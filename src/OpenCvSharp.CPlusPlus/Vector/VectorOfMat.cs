@@ -23,6 +23,7 @@ namespace OpenCvSharp.CPlusPlus
         {
             ptr = NativeMethods.vector_Mat_new1();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,6 +34,25 @@ namespace OpenCvSharp.CPlusPlus
                 throw new ArgumentOutOfRangeException("size");
             ptr = NativeMethods.vector_Mat_new2(new IntPtr(size));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mats"></param>
+        public VectorOfMat(IEnumerable<Mat> mats)
+        {
+            if (mats == null)
+                throw new ArgumentNullException("mats");
+
+            var matPointers = EnumerableEx.SelectPtrs(mats);
+            using (var matPointersPointer = new ArrayAddress1<IntPtr>(matPointers))
+            {
+                ptr = NativeMethods.vector_Mat_new3(
+                    matPointersPointer.Pointer, 
+                    new IntPtr(matPointers.Length));
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
