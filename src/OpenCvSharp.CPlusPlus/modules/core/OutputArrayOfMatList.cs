@@ -26,6 +26,15 @@ namespace OpenCvSharp.CPlusPlus
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public override IEnumerable<Mat> GetVectorOfMat()
+        {
+            return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public override void AssignResult()
         {
             if (!IsReady())

@@ -80,6 +80,21 @@ namespace OpenCvSharp.CPlusPlus
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="mat"></param>
+        internal InputArray(IEnumerable<Mat> mat)
+        {
+            if (mat == null)
+                throw new ArgumentNullException("mat");
+            using (var matVector = new VectorOfMat(mat))
+            {
+                ptr = NativeMethods.core_InputArray_new_byVectorOfMat(matVector.CvPtr);
+            }
+            obj = mat;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
@@ -156,6 +171,26 @@ namespace OpenCvSharp.CPlusPlus
         {
             return Create(mat);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mats"></param>
+        /// <returns></returns>
+        public static explicit operator InputArray(List<Mat> mats)
+        {
+            return Create(mats);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mats"></param>
+        /// <returns></returns>
+        public static explicit operator InputArray(Mat[] mats)
+        {
+            return Create((IEnumerable<Mat>)mats);
+        }
         #endregion
 
         #region Operators
@@ -222,6 +257,16 @@ namespace OpenCvSharp.CPlusPlus
         public static InputArray Create(GpuMat mat)
         {
             return new InputArray(mat);
+        }
+
+        /// <summary>
+        /// Creates a proxy class of the specified array of Mat 
+        /// </summary>
+        /// <param name="matVector"></param>
+        /// <returns></returns>
+        public static InputArray Create(IEnumerable<Mat> matVector)
+        {
+            return new InputArray(matVector);
         }
 
         /// <summary>

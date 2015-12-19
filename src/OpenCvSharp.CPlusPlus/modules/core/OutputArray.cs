@@ -122,7 +122,7 @@ namespace OpenCvSharp.CPlusPlus
         /// 
         /// </summary>
         /// <returns></returns>
-        public Mat GetMat()
+        public virtual Mat GetMat()
         {
             return obj as Mat;
         }
@@ -140,7 +140,7 @@ namespace OpenCvSharp.CPlusPlus
         /// 
         /// </summary>
         /// <returns></returns>
-        public Mat GetGpuMat()
+        public virtual Mat GetGpuMat()
         {
             return obj as GpuMat;
         }
@@ -158,7 +158,7 @@ namespace OpenCvSharp.CPlusPlus
         /// 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mat> GetVectorOfMat()
+        public virtual IEnumerable<Mat> GetVectorOfMat()
         {
             return obj as IEnumerable<Mat>;
         }

@@ -192,7 +192,7 @@ namespace OpenCvSharp.CPlusPlus
             InputArray img, OutputArray pyramid,
             Size winSize, int maxLevel,
             bool withDerivatives = true,
-            BorderType pyrBorder = BorderType.Reflict101,
+            BorderType pyrBorder = BorderType.Reflect101,
             BorderType derivBorder = BorderType.Constant,
             bool tryReuseInputImage = true)
         {
@@ -203,11 +203,50 @@ namespace OpenCvSharp.CPlusPlus
             img.ThrowIfDisposed();
             pyramid.ThrowIfNotReady();
 
-            int result = NativeMethods.video_buildOpticalFlowPyramid(
+            int result = NativeMethods.video_buildOpticalFlowPyramid1(
                 img.CvPtr, pyramid.CvPtr, winSize, maxLevel, withDerivatives ? 1 : 0, 
                 (int)pyrBorder, (int)derivBorder, tryReuseInputImage ? 1 : 0);
             pyramid.Fix();
             return result;
+        }
+
+        /// <summary>
+        /// Constructs a pyramid which can be used as input for calcOpticalFlowPyrLK
+        /// </summary>
+        /// <param name="img">8-bit input image.</param>
+        /// <param name="pyramid">output pyramid.</param>
+        /// <param name="winSize">window size of optical flow algorithm. 
+        /// Must be not less than winSize argument of calcOpticalFlowPyrLK(). 
+        /// It is needed to calculate required padding for pyramid levels.</param>
+        /// <param name="maxLevel">0-based maximal pyramid level number.</param>
+        /// <param name="withDerivatives">set to precompute gradients for the every pyramid level. 
+        /// If pyramid is constructed without the gradients then calcOpticalFlowPyrLK() will 
+        /// calculate them internally.</param>
+        /// <param name="pyrBorder">the border mode for pyramid layers.</param>
+        /// <param name="derivBorder">the border mode for gradients.</param>
+        /// <param name="tryReuseInputImage">put ROI of input image into the pyramid if possible. 
+        /// You can pass false to force data copying.</param>
+        /// <returns>number of levels in constructed pyramid. Can be less than maxLevel.</returns>
+        public static int BuildOpticalFlowPyramid(
+            InputArray img, out Mat[] pyramid,
+            Size winSize, int maxLevel,
+            bool withDerivatives = true,
+            BorderType pyrBorder = BorderType.Reflect101,
+            BorderType derivBorder = BorderType.Constant,
+            bool tryReuseInputImage = true)
+        {
+            if (img == null)
+                throw new ArgumentNullException("img");
+            img.ThrowIfDisposed();
+
+            using (var pyramidVec = new VectorOfMat())
+            {
+                int result = NativeMethods.video_buildOpticalFlowPyramid1(
+                    img.CvPtr, pyramidVec.CvPtr, winSize, maxLevel, withDerivatives ? 1 : 0,
+                    (int)pyrBorder, (int)derivBorder, tryReuseInputImage ? 1 : 0);
+                pyramid = pyramidVec.ToArray();
+                return result;
+            }
         }
 
         /// <summary>
