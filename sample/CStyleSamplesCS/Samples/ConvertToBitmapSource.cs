@@ -29,7 +29,7 @@ namespace CStyleSamplesCS
                 src.Smooth(src, SmoothType.Gaussian, 5);
                 src.Threshold(dst, 0, 255, ThresholdType.Otsu);
                 // IplImage -> BitmapSource
-                bs = dst.ToBitmapSource();
+                bs = dst.ToWriteableBitmap();
                 //bs = BitmapSourceConverter.ToBitmapSource(dst);
             }
 

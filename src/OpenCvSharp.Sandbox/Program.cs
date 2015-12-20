@@ -25,7 +25,7 @@ namespace OpenCvSharp.Sandbox
         [STAThread]
         private static void Main(string[] args)
         {
-            VideoCaptureSample();
+            //VideoCaptureSample();
             //OpenCVError();
             /*
             double ret = Cv2.PointPolygonTest(new[] { new Point2f(0, 0), new Point2f(0, 10), new Point2f(10, 10), new Point2f(10, 0) }, new Point2f(5, 5), false);
@@ -34,9 +34,11 @@ namespace OpenCvSharp.Sandbox
             BForceMatcherSample();*/
             //ChamferMatchingSample();
 
-            /*var img1 = new IplImage("data/lenna.png", LoadMode.Color);
+            ///*
+            var img1 = new IplImage("data/lenna.png", LoadMode.Color);
             var img2 = new IplImage("data/match2.png", LoadMode.Color);
-            Surf(img1, img2);*/
+            Surf(img1, img2);
+            //*/
 
             //Mat[] mats = StitchingPreprocess(400, 400, 10);
             //Stitching(mats);
