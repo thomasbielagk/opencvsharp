@@ -1902,6 +1902,7 @@ namespace OpenCvSharp.CPlusPlus
             dst.ThrowIfNotReady();
             m.ThrowIfDisposed();
             NativeMethods.core_perspectiveTransform(src.CvPtr, dst.CvPtr, m.CvPtr);
+            GC.KeepAlive(src);
             dst.Fix();
         }
 
@@ -1912,7 +1913,7 @@ namespace OpenCvSharp.CPlusPlus
         /// each element is 2D/3D vector to be transformed</param>
         /// <param name="m">3x3 or 4x4 transformation matrix</param>
         /// <returns>The destination array; it will have the same size and same type as src</returns>
-        public static Point2f[] PerspectiveTransform(IEnumerable<Point2f> src, double[,] m)
+        public static Point2f[] PerspectiveTransform(IEnumerable<Point2f> src, Mat m)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
@@ -1921,9 +1922,8 @@ namespace OpenCvSharp.CPlusPlus
 
             using (var srcMat = MatOfPoint2f.FromArray(src))
             using (var dstMat = new MatOfPoint2f())
-            using (var mMat = MatOfDouble.FromArray(m))
             {
-                NativeMethods.core_perspectiveTransform(srcMat.CvPtr, dstMat.CvPtr, mMat.CvPtr);
+                NativeMethods.core_perspectiveTransform_Mat(srcMat.CvPtr, dstMat.CvPtr, m.CvPtr);
                 return dstMat.ToArray();
             }
         }
@@ -1935,7 +1935,7 @@ namespace OpenCvSharp.CPlusPlus
         /// each element is 2D/3D vector to be transformed</param>
         /// <param name="m">3x3 or 4x4 transformation matrix</param>
         /// <returns>The destination array; it will have the same size and same type as src</returns>
-        public static Point2d[] PerspectiveTransform(IEnumerable<Point2d> src, double[,] m)
+        public static Point2d[] PerspectiveTransform(IEnumerable<Point2d> src, Mat m)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
@@ -1944,9 +1944,8 @@ namespace OpenCvSharp.CPlusPlus
 
             using (var srcMat = MatOfPoint2d.FromArray(src))
             using (var dstMat = new MatOfPoint2d())
-            using (var mMat = MatOfDouble.FromArray(m))
             {
-                NativeMethods.core_perspectiveTransform(srcMat.CvPtr, dstMat.CvPtr, mMat.CvPtr);
+                NativeMethods.core_perspectiveTransform_Mat(srcMat.CvPtr, dstMat.CvPtr, m.CvPtr);
                 return dstMat.ToArray();
             }
         }
@@ -1958,7 +1957,7 @@ namespace OpenCvSharp.CPlusPlus
         /// each element is 2D/3D vector to be transformed</param>
         /// <param name="m">3x3 or 4x4 transformation matrix</param>
         /// <returns>The destination array; it will have the same size and same type as src</returns>
-        public static Point3f[] PerspectiveTransform(IEnumerable<Point3f> src, double[,] m)
+        public static Point3f[] PerspectiveTransform(IEnumerable<Point3f> src, Mat m)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
@@ -1967,9 +1966,8 @@ namespace OpenCvSharp.CPlusPlus
 
             using (var srcMat = MatOfPoint3f.FromArray(src))
             using (var dstMat = new MatOfPoint3f())
-            using (var mMat = MatOfDouble.FromArray(m))
             {
-                NativeMethods.core_perspectiveTransform(srcMat.CvPtr, dstMat.CvPtr, mMat.CvPtr);
+                NativeMethods.core_perspectiveTransform_Mat(srcMat.CvPtr, dstMat.CvPtr, m.CvPtr);
                 return dstMat.ToArray();
             }
         }
@@ -1981,7 +1979,7 @@ namespace OpenCvSharp.CPlusPlus
         /// each element is 2D/3D vector to be transformed</param>
         /// <param name="m">3x3 or 4x4 transformation matrix</param>
         /// <returns>The destination array; it will have the same size and same type as src</returns>
-        public static Point3d[] PerspectiveTransform(IEnumerable<Point3d> src, double[,] m)
+        public static Point3d[] PerspectiveTransform(IEnumerable<Point3d> src, Mat m)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
@@ -1990,13 +1988,11 @@ namespace OpenCvSharp.CPlusPlus
 
             using (var srcMat = MatOfPoint3d.FromArray(src))
             using (var dstMat = new MatOfPoint3d())
-            using (var mMat = MatOfDouble.FromArray(m))
             {
-                NativeMethods.core_perspectiveTransform(srcMat.CvPtr, dstMat.CvPtr, mMat.CvPtr);
+                NativeMethods.core_perspectiveTransform_Mat(srcMat.CvPtr, dstMat.CvPtr, m.CvPtr);
                 return dstMat.ToArray();
             }
         }
-
 
         #endregion
         #region CompleteSymm
