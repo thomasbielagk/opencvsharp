@@ -52,16 +52,16 @@ CVAPI(void) face_FaceRecognizer_load2(FaceRecognizer *obj, cv::FileStorage *fs)
 
 CVAPI(cv::Ptr<FaceRecognizer>*) face_createEigenFaceRecognizer(int numComponents, double threshold)
 {
-	return clone(createEigenFaceRecognizer(numComponents, threshold));
+	return clone<FaceRecognizer>(createEigenFaceRecognizer(numComponents, threshold));
 }
 CVAPI(cv::Ptr<FaceRecognizer>*) face_createFisherFaceRecognizer(int numComponents, double threshold)
 {
-	return clone(createFisherFaceRecognizer(numComponents, threshold));
+	return clone<FaceRecognizer>(createFisherFaceRecognizer(numComponents, threshold));
 }
 CVAPI(cv::Ptr<FaceRecognizer>*) face_createLBPHFaceRecognizer(
 	int radius, int neighbors, int gridX, int gridY, double threshold)
 {
-	return clone(createLBPHFaceRecognizer(radius, neighbors, gridX, gridY, threshold));
+	return clone<FaceRecognizer>(createLBPHFaceRecognizer(radius, neighbors, gridX, gridY, threshold));
 }
 CVAPI(FaceRecognizer*) face_Ptr_FaceRecognizer_get(cv::Ptr<FaceRecognizer> *obj)
 {

@@ -1,9 +1,6 @@
 #ifndef _INCLUDE_OPENCV_H_
 #define _INCLUDE_OPENCV_H_
 
-#define ENABLED_CONTRIB
-#undef ENABLED_CONTRIB
-
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable: 4251)
